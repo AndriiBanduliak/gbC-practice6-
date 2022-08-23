@@ -1,43 +1,34 @@
-﻿//Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+﻿//Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
 
-//0, 7, 8, -2, -2-> 2
-
-//1, -7, 567, 89, 223-> 3
+//b1 = 2, k1 = 5, b2 = 4, k2 = 9-> (-0, 5; -0,5)
 
 using static System.Console;
 
-WriteLine("How many numbers do you want to enter ?");
-int length=int.Parse(ReadLine());
-int[]digits=getArr(length);
-printArr(digits);
-printCount(digits);
+Write("Enter coordinate b1= ");
+double b1 = int.Parse(ReadLine());
+Write("Enter coordinate k1= ");
+double k1 = int.Parse(ReadLine());
+Write("Enter coordinate b2= ");
+double b2 = int.Parse(ReadLine());
+Write("Enter coordinate k2= ");
+double k2 = int.Parse(ReadLine());
 
 
-void printCount(int[] arr)
+
+if (k1 == k2)
 {
-    int count = 0;
-    for (int i = 0; i < arr.Length; i++)
-    {
-        if (arr[i] > 0) count++;
-    }
-    Write($" ->{count}");
+    if (b1 == b2) WriteLine("Straight lines are matched");
+    else WriteLine("Lines are parallel");
 }
-void printArr(int[]arr)
+else WriteLine($"The Point of intersection is at the point({x(b1, k1, b2, k2)};{y(b1, k1, x(b1, k1, b2, k2))})");
+
+
+
+double x(double b1, double k1, double b2, double k2)
 {
-    for (int i=0; i<digits.Length; i++)
-    {
-        Write(digits[i]);
-        if (i < digits.Length - 1) Write(", ");
-    }
-    
+    return (b2 - b1) / (k1 - k2);
 }
-int[] getArr(int length)
+double y(double b, double k, double x)
 {
-    int[] arr=new int[length];
-    for (int i=0; i<length; i++)
-    {
-        WriteLine($"Number  {i+1}");
-        arr[i] = int.Parse(ReadLine());
-    }
-    return arr;
+    return k * x + b;
 }
